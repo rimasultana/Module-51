@@ -20,7 +20,16 @@ const Navbar = () => {
     { id: 1, name: "Home", path: "/" },
     { id: 2, name: "Login", path: "/login" },
     { id: 3, name: "Register", path: "/register" },
+    //  {
+    //   user && <>
+    //   { id: 3, name: "Orders", path: "/order" },
+    //   </>
+    //  }
   ];
+  if (user) {
+    navlinks.push({ id: 4, name: "Orders", path: "/order" });
+  }
+
 
   const links = navlinks.map(({ name, path, id }) => (
     <li key={id}>
