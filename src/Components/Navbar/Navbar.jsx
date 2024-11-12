@@ -29,6 +29,9 @@ const Navbar = () => {
   if (user) {
     navlinks.push({ id: 4, name: "Orders", path: "/order" });
   }
+  if (user) {
+    navlinks.push({ id: 4, name: "Profile", path: "/profile" });
+  }
 
 
   const links = navlinks.map(({ name, path, id }) => (

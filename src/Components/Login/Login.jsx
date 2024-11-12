@@ -1,22 +1,34 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 export default function Login() {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
 
     signInUser(email, password)
       .then((result) => {
         console.log(result.user);
+        e.target.reset;
+        navigate("/");
       })
       .catch((error) => {
         console.log("error", error.message);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("errpr", error.massage);
       });
   };
 
@@ -62,6 +74,9 @@ export default function Login() {
           <p className="my-5 ml-8  ">
             New to this website? please <Link to="/register">Register</Link>
           </p>
+          <button onClick={handleGoogleSignIn} className="btn border-red-400">
+            Google
+          </button>
         </div>
       </div>
     </>
